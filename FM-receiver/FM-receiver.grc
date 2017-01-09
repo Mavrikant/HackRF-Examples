@@ -650,7 +650,7 @@
     </param>
     <param>
       <key>if_gain0</key>
-      <value>40</value>
+      <value>38</value>
     </param>
     <param>
       <key>iq_balance_mode0</key>
@@ -658,7 +658,7 @@
     </param>
     <param>
       <key>gain0</key>
-      <value>20</value>
+      <value>0</value>
     </param>
     <param>
       <key>ant10</key>
