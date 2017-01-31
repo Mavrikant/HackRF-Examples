@@ -1,9 +1,20 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
 ##################################################
-# Gnuradio Python Flow Graph
+# GNU Radio Python Flow Graph
 # Title: Multi Tx
-# Generated: Fri Jan 24 22:49:01 2014
+# Generated: Wed Jan 25 11:05:30 2017
 ##################################################
+
+if __name__ == '__main__':
+    import ctypes
+    import sys
+    if sys.platform.startswith('linux'):
+        try:
+            x11 = ctypes.cdll.LoadLibrary('libX11.so')
+            x11.XInitThreads()
+        except:
+            print "Warning: failed to XInitThreads()"
 
 from gnuradio import analog
 from gnuradio import blocks
@@ -18,7 +29,9 @@ from gnuradio.wxgui import forms
 from grc_gnuradio import wxgui as grc_wxgui
 from optparse import OptionParser
 import osmosdr
+import time
 import wx
+
 
 class multi_tx(grc_wxgui.top_block_gui):
 
@@ -256,7 +269,7 @@ class multi_tx(grc_wxgui.top_block_gui):
           log=False,
           )
         self.digital_map_bb_0 = digital.map_bb(([1,0]))
-        self.blocks_wavfile_source_0 = blocks.wavfile_source("multi_tx.wav", True)
+        self.blocks_wavfile_source_0 = blocks.wavfile_source("/home/serdar/HackRF-Examples/NOT-tested/multi_tx.wav", True)
         self.blocks_vector_source_x_2 = blocks.vector_source_b((0,0, 1,1,0,1,1,0,1, 0,0, 1,0,1,0,1,1, 0,0, 1,1,0,1, 0,0, 1,0,1,1,1, 0,0, 1, 0,0, 1,1,0,1, 0,0, 1,0,1,1,1, 0,0, 1, 0,0, 1,1,0,1,1,0,1,0,1, 0,0, 1,1,1,0,1,1,1, 0,0, 1,1,1,1,1,1,1,1, 0,0, 1,1,1,1,1,1,1, 0,0, 1,0,1,0,1,1,1,1, 0,0, 1,0,1,0,1,1,1,1, 0,0, 1, 0,0, 1,0,1, 0,0, 1,1, 0,0, 1,0,1,1,1, 0,0, 1,0,1, 0,0, 1,1,0,1, 0,0, 1,1,1,1, 0,0, 1,0,1,1,0,1,1, 0,0, 1,0,1,0,1,1,1, 0,0, 1,1,1,0,1), True, 1, [])
         self.blocks_vector_source_x_0 = blocks.vector_source_c((1,0,1,0,1,0,1,1,1, 0,0,0, 1,0,1,0,1,0,1,1,1, 0,0,0, 1,0,1,0,1,0,1,1,1, 0,0,0,0,0,0,0, 1,1,1,0,1,0,1, 0,0,0, 1, 0,0,0,0,0,0,0, 1,0,1,0,1,0,1,1,1, 0,0,0, 1, 0,0,0, 1,0,1,0,1,0,1,1,1,0,1,1,1, 0,0,0, 1,0,1, 0,0,0, 1,0,1,1,1,0,1, 0,0,0, 1,0,1,1,1,0,1, 0,0,0,0,0,0,0, 1,1,1, 0,0,0, 1, 0,0,0, 1,0,1,0,1, 0,0,0, 1,1,1, 0,0,0, 1,0,1, 0,0,0, 1,1,1,0,1, 0,0,0, 1,1,1,0,1,1,1,0,1, 0,0,0,0,0,0,0), True, 1, [])
         self.blocks_unpacked_to_packed_xx_0 = blocks.unpacked_to_packed_bb(1, gr.GR_MSB_FIRST)
@@ -297,60 +310,57 @@ class multi_tx(grc_wxgui.top_block_gui):
         	quad_rate=audio_rate * 2,
         	tau=75e-6,
         	max_dev=5e3,
-        )
+                )
         self.analog_const_source_x_0 = analog.sig_source_f(0, analog.GR_CONST_WAVE, 0, 0, 0)
 
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.blocks_multiply_xx_1, 0), (self.blocks_add_xx_0, 0))
-        self.connect((self.analog_sig_source_x_1, 0), (self.blocks_multiply_xx_1, 1))
-        self.connect((self.rational_resampler_xxx_0, 0), (self.blocks_multiply_xx_1, 0))
-        self.connect((self.blocks_wavfile_source_0, 0), (self.analog_nbfm_tx_0, 0))
-        self.connect((self.analog_nbfm_tx_0, 0), (self.rational_resampler_xxx_1, 0))
-        self.connect((self.rational_resampler_xxx_1, 0), (self.blocks_multiply_xx_0, 0))
-        self.connect((self.analog_sig_source_x_0, 0), (self.blocks_multiply_xx_0, 1))
-        self.connect((self.analog_wfm_tx_0, 0), (self.rational_resampler_xxx_0, 0))
-        self.connect((self.blocks_wavfile_source_0, 0), (self.analog_wfm_tx_0, 0))
-        self.connect((self.blocks_multiply_xx_0, 0), (self.blocks_add_xx_0, 1))
-        self.connect((self.blocks_add_const_vxx_0, 0), (self.blocks_multiply_xx_2, 0))
-        self.connect((self.analog_sig_source_x_2, 0), (self.blocks_multiply_xx_2, 1))
-        self.connect((self.low_pass_filter_1, 0), (self.blocks_add_const_vxx_0, 0))
-        self.connect((self.blocks_float_to_complex_0, 0), (self.low_pass_filter_1, 0))
-        self.connect((self.analog_const_source_x_0, 0), (self.blocks_float_to_complex_0, 1))
-        self.connect((self.blocks_wavfile_source_0, 0), (self.blocks_float_to_complex_0, 0))
-        self.connect((self.blocks_multiply_xx_2, 0), (self.blocks_add_xx_1, 0))
-        self.connect((self.blocks_add_xx_1, 0), (self.rational_resampler_xxx_2, 0))
-        self.connect((self.blocks_multiply_xx_4, 0), (self.blocks_add_xx_0, 2))
-        self.connect((self.analog_sig_source_x_4, 0), (self.blocks_multiply_xx_4, 1))
-        self.connect((self.rational_resampler_xxx_2, 0), (self.blocks_multiply_xx_4, 0))
-        self.connect((self.blocks_float_to_complex_0, 0), (self.band_pass_filter_0_0, 0))
-        self.connect((self.analog_sig_source_x_3_0, 0), (self.blocks_multiply_xx_3_0, 1))
-        self.connect((self.band_pass_filter_0_0, 0), (self.blocks_multiply_xx_3_0, 0))
-        self.connect((self.blocks_multiply_xx_3_0, 0), (self.blocks_add_xx_1, 1))
-        self.connect((self.band_pass_filter_0, 0), (self.blocks_multiply_xx_3, 0))
-        self.connect((self.analog_sig_source_x_3, 0), (self.blocks_multiply_xx_3, 1))
-        self.connect((self.blocks_multiply_xx_3, 0), (self.blocks_add_xx_1, 2))
-        self.connect((self.blocks_add_xx_0, 0), (self.iqbalance_fix_cc_0, 0))
-        self.connect((self.blocks_multiply_xx_5, 0), (self.blocks_add_xx_1, 3))
-        self.connect((self.analog_sig_source_x_5, 0), (self.blocks_multiply_xx_5, 1))
-        self.connect((self.root_raised_cosine_filter_0, 0), (self.blocks_multiply_xx_5, 0))
-        self.connect((self.analog_sig_source_x_6, 0), (self.blocks_multiply_xx_6, 1))
-        self.connect((self.blocks_multiply_xx_6, 0), (self.blocks_add_xx_1, 4))
-        self.connect((self.rational_resampler_xxx_3, 0), (self.blocks_multiply_xx_6, 0))
-        self.connect((self.blocks_unpacked_to_packed_xx_0, 0), (self.digital_psk_mod_0, 0))
-        self.connect((self.digital_psk_mod_0, 0), (self.rational_resampler_xxx_3, 0))
-        self.connect((self.blocks_vector_source_x_2, 0), (self.digital_map_bb_0, 0))
-        self.connect((self.digital_map_bb_0, 0), (self.blocks_unpacked_to_packed_xx_0, 0))
-        self.connect((self.blocks_vector_source_x_0, 0), (self.blocks_repeat_0, 0))
-        self.connect((self.blocks_repeat_0, 0), (self.root_raised_cosine_filter_1, 0))
-        self.connect((self.root_raised_cosine_filter_1, 0), (self.root_raised_cosine_filter_0, 0))
-        self.connect((self.iqbalance_fix_cc_0, 0), (self.blocks_add_const_vxx_1, 0))
-        self.connect((self.blocks_add_const_vxx_1, 0), (self.osmosdr_sink_0, 0))
-        self.connect((self.blocks_float_to_complex_0, 0), (self.band_pass_filter_0, 0))
-
-
-# QT sink close method reimplementation
+        self.connect((self.analog_const_source_x_0, 0), (self.blocks_float_to_complex_0, 1))    
+        self.connect((self.analog_nbfm_tx_0, 0), (self.rational_resampler_xxx_1, 0))    
+        self.connect((self.analog_sig_source_x_0, 0), (self.blocks_multiply_xx_0, 1))    
+        self.connect((self.analog_sig_source_x_1, 0), (self.blocks_multiply_xx_1, 1))    
+        self.connect((self.analog_sig_source_x_2, 0), (self.blocks_multiply_xx_2, 1))    
+        self.connect((self.analog_sig_source_x_3, 0), (self.blocks_multiply_xx_3, 1))    
+        self.connect((self.analog_sig_source_x_3_0, 0), (self.blocks_multiply_xx_3_0, 1))    
+        self.connect((self.analog_sig_source_x_4, 0), (self.blocks_multiply_xx_4, 1))    
+        self.connect((self.analog_sig_source_x_5, 0), (self.blocks_multiply_xx_5, 1))    
+        self.connect((self.analog_sig_source_x_6, 0), (self.blocks_multiply_xx_6, 1))    
+        self.connect((self.analog_wfm_tx_0, 0), (self.rational_resampler_xxx_0, 0))    
+        self.connect((self.band_pass_filter_0, 0), (self.blocks_multiply_xx_3, 0))    
+        self.connect((self.band_pass_filter_0_0, 0), (self.blocks_multiply_xx_3_0, 0))    
+        self.connect((self.blocks_add_const_vxx_0, 0), (self.blocks_multiply_xx_2, 0))    
+        self.connect((self.blocks_add_const_vxx_1, 0), (self.osmosdr_sink_0, 0))    
+        self.connect((self.blocks_add_xx_0, 0), (self.iqbalance_fix_cc_0, 0))    
+        self.connect((self.blocks_add_xx_1, 0), (self.rational_resampler_xxx_2, 0))    
+        self.connect((self.blocks_float_to_complex_0, 0), (self.band_pass_filter_0, 0))    
+        self.connect((self.blocks_float_to_complex_0, 0), (self.band_pass_filter_0_0, 0))    
+        self.connect((self.blocks_float_to_complex_0, 0), (self.low_pass_filter_1, 0))    
+        self.connect((self.blocks_multiply_xx_0, 0), (self.blocks_add_xx_0, 1))    
+        self.connect((self.blocks_multiply_xx_1, 0), (self.blocks_add_xx_0, 0))    
+        self.connect((self.blocks_multiply_xx_2, 0), (self.blocks_add_xx_1, 0))    
+        self.connect((self.blocks_multiply_xx_3, 0), (self.blocks_add_xx_1, 2))    
+        self.connect((self.blocks_multiply_xx_3_0, 0), (self.blocks_add_xx_1, 1))    
+        self.connect((self.blocks_multiply_xx_4, 0), (self.blocks_add_xx_0, 2))    
+        self.connect((self.blocks_multiply_xx_5, 0), (self.blocks_add_xx_1, 3))    
+        self.connect((self.blocks_multiply_xx_6, 0), (self.blocks_add_xx_1, 4))    
+        self.connect((self.blocks_repeat_0, 0), (self.root_raised_cosine_filter_1, 0))    
+        self.connect((self.blocks_unpacked_to_packed_xx_0, 0), (self.digital_psk_mod_0, 0))    
+        self.connect((self.blocks_vector_source_x_0, 0), (self.blocks_repeat_0, 0))    
+        self.connect((self.blocks_vector_source_x_2, 0), (self.digital_map_bb_0, 0))    
+        self.connect((self.blocks_wavfile_source_0, 0), (self.analog_nbfm_tx_0, 0))    
+        self.connect((self.blocks_wavfile_source_0, 0), (self.analog_wfm_tx_0, 0))    
+        self.connect((self.blocks_wavfile_source_0, 0), (self.blocks_float_to_complex_0, 0))    
+        self.connect((self.digital_map_bb_0, 0), (self.blocks_unpacked_to_packed_xx_0, 0))    
+        self.connect((self.digital_psk_mod_0, 0), (self.rational_resampler_xxx_3, 0))    
+        self.connect((self.iqbalance_fix_cc_0, 0), (self.blocks_add_const_vxx_1, 0))    
+        self.connect((self.low_pass_filter_1, 0), (self.blocks_add_const_vxx_0, 0))    
+        self.connect((self.rational_resampler_xxx_0, 0), (self.blocks_multiply_xx_1, 0))    
+        self.connect((self.rational_resampler_xxx_1, 0), (self.blocks_multiply_xx_0, 0))    
+        self.connect((self.rational_resampler_xxx_2, 0), (self.blocks_multiply_xx_4, 0))    
+        self.connect((self.rational_resampler_xxx_3, 0), (self.blocks_multiply_xx_6, 0))    
+        self.connect((self.root_raised_cosine_filter_0, 0), (self.blocks_multiply_xx_5, 0))    
+        self.connect((self.root_raised_cosine_filter_1, 0), (self.root_raised_cosine_filter_0, 0))    
 
     def get_audio_rate(self):
         return self.audio_rate
@@ -358,16 +368,16 @@ class multi_tx(grc_wxgui.top_block_gui):
     def set_audio_rate(self, audio_rate):
         self.audio_rate = audio_rate
         self.set_samp_rate(self.audio_rate * 40)
-        self.band_pass_filter_0_0.set_taps(firdes.complex_band_pass(1, self.audio_rate, -2800, -200, 200, firdes.WIN_HAMMING, 6.76))
-        self.band_pass_filter_0.set_taps(firdes.complex_band_pass(1, self.audio_rate, 200, 2800, 200, firdes.WIN_HAMMING, 6.76))
-        self.low_pass_filter_1.set_taps(firdes.low_pass(0.5, self.audio_rate, 5000, 400, firdes.WIN_HAMMING, 6.76))
-        self.root_raised_cosine_filter_1.set_taps(firdes.root_raised_cosine(1, self.audio_rate, 5, 0.35, 200))
-        self.root_raised_cosine_filter_0.set_taps(firdes.root_raised_cosine(1, self.audio_rate, 5, 0.35, 200))
-        self.analog_sig_source_x_6.set_sampling_freq(self.audio_rate)
-        self.analog_sig_source_x_5.set_sampling_freq(self.audio_rate)
+        self.analog_sig_source_x_2.set_sampling_freq(self.audio_rate)
         self.analog_sig_source_x_3.set_sampling_freq(self.audio_rate)
         self.analog_sig_source_x_3_0.set_sampling_freq(self.audio_rate)
-        self.analog_sig_source_x_2.set_sampling_freq(self.audio_rate)
+        self.analog_sig_source_x_5.set_sampling_freq(self.audio_rate)
+        self.analog_sig_source_x_6.set_sampling_freq(self.audio_rate)
+        self.band_pass_filter_0.set_taps(firdes.complex_band_pass(1, self.audio_rate, 200, 2800, 200, firdes.WIN_HAMMING, 6.76))
+        self.band_pass_filter_0_0.set_taps(firdes.complex_band_pass(1, self.audio_rate, -2800, -200, 200, firdes.WIN_HAMMING, 6.76))
+        self.low_pass_filter_1.set_taps(firdes.low_pass(0.5, self.audio_rate, 5000, 400, firdes.WIN_HAMMING, 6.76))
+        self.root_raised_cosine_filter_0.set_taps(firdes.root_raised_cosine(1, self.audio_rate, 5, 0.35, 200))
+        self.root_raised_cosine_filter_1.set_taps(firdes.root_raised_cosine(1, self.audio_rate, 5, 0.35, 200))
 
     def get_wpm(self):
         return self.wpm
@@ -380,25 +390,25 @@ class multi_tx(grc_wxgui.top_block_gui):
 
     def set_wbfm_on(self, wbfm_on):
         self.wbfm_on = wbfm_on
-        self.analog_sig_source_x_1.set_amplitude(1.0 / 7 if self.wbfm_on else 0)
         self._wbfm_on_check_box.set_value(self.wbfm_on)
+        self.analog_sig_source_x_1.set_amplitude(1.0 / 7 if self.wbfm_on else 0)
 
     def get_usb_on(self):
         return self.usb_on
 
     def set_usb_on(self, usb_on):
         self.usb_on = usb_on
-        self.analog_sig_source_x_3.set_amplitude(1.8 if self.usb_on else 0)
         self._usb_on_check_box.set_value(self.usb_on)
+        self.analog_sig_source_x_3.set_amplitude(1.8 if self.usb_on else 0)
 
     def get_samp_rate(self):
         return self.samp_rate
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.analog_sig_source_x_4.set_sampling_freq(self.samp_rate)
         self.analog_sig_source_x_0.set_sampling_freq(self.samp_rate)
         self.analog_sig_source_x_1.set_sampling_freq(self.samp_rate)
+        self.analog_sig_source_x_4.set_sampling_freq(self.samp_rate)
         self.osmosdr_sink_0.set_sample_rate(self.samp_rate)
 
     def get_q_offset(self):
@@ -406,60 +416,60 @@ class multi_tx(grc_wxgui.top_block_gui):
 
     def set_q_offset(self, q_offset):
         self.q_offset = q_offset
-        self.blocks_add_const_vxx_1.set_k((self.i_offset + 1j * self.q_offset, ))
         self._q_offset_slider.set_value(self.q_offset)
         self._q_offset_text_box.set_value(self.q_offset)
+        self.blocks_add_const_vxx_1.set_k((self.i_offset + 1j * self.q_offset, ))
 
     def get_psk_on(self):
         return self.psk_on
 
     def set_psk_on(self, psk_on):
         self.psk_on = psk_on
-        self.analog_sig_source_x_6.set_amplitude(1 if self.psk_on else 0)
         self._psk_on_check_box.set_value(self.psk_on)
+        self.analog_sig_source_x_6.set_amplitude(1 if self.psk_on else 0)
 
     def get_phase(self):
         return self.phase
 
     def set_phase(self, phase):
         self.phase = phase
-        self.iqbalance_fix_cc_0.set_phase(self.phase)
         self._phase_slider.set_value(self.phase)
         self._phase_text_box.set_value(self.phase)
+        self.iqbalance_fix_cc_0.set_phase(self.phase)
 
     def get_nbfm_on(self):
         return self.nbfm_on
 
     def set_nbfm_on(self, nbfm_on):
         self.nbfm_on = nbfm_on
-        self.analog_sig_source_x_0.set_amplitude(1.0 / 7 if self.nbfm_on else 0)
         self._nbfm_on_check_box.set_value(self.nbfm_on)
+        self.analog_sig_source_x_0.set_amplitude(1.0 / 7 if self.nbfm_on else 0)
 
     def get_magnitude(self):
         return self.magnitude
 
     def set_magnitude(self, magnitude):
         self.magnitude = magnitude
-        self.iqbalance_fix_cc_0.set_mag(self.magnitude)
         self._magnitude_slider.set_value(self.magnitude)
         self._magnitude_text_box.set_value(self.magnitude)
+        self.iqbalance_fix_cc_0.set_mag(self.magnitude)
 
     def get_lsb_on(self):
         return self.lsb_on
 
     def set_lsb_on(self, lsb_on):
         self.lsb_on = lsb_on
-        self.analog_sig_source_x_3_0.set_amplitude(1.8 if self.lsb_on else 0)
         self._lsb_on_check_box.set_value(self.lsb_on)
+        self.analog_sig_source_x_3_0.set_amplitude(1.8 if self.lsb_on else 0)
 
     def get_i_offset(self):
         return self.i_offset
 
     def set_i_offset(self, i_offset):
         self.i_offset = i_offset
-        self.blocks_add_const_vxx_1.set_k((self.i_offset + 1j * self.q_offset, ))
         self._i_offset_slider.set_value(self.i_offset)
         self._i_offset_text_box.set_value(self.i_offset)
+        self.blocks_add_const_vxx_1.set_k((self.i_offset + 1j * self.q_offset, ))
 
     def get_gain(self):
         return self.gain
@@ -473,8 +483,8 @@ class multi_tx(grc_wxgui.top_block_gui):
 
     def set_cw_on(self, cw_on):
         self.cw_on = cw_on
-        self.analog_sig_source_x_5.set_amplitude(1 if self.cw_on else 0)
         self._cw_on_check_box.set_value(self.cw_on)
+        self.analog_sig_source_x_5.set_amplitude(1 if self.cw_on else 0)
 
     def get_center_freq(self):
         return self.center_freq
@@ -488,21 +498,16 @@ class multi_tx(grc_wxgui.top_block_gui):
 
     def set_am_on(self, am_on):
         self.am_on = am_on
-        self.analog_sig_source_x_2.set_amplitude(1 if self.am_on else 0)
         self._am_on_check_box.set_value(self.am_on)
+        self.analog_sig_source_x_2.set_amplitude(1 if self.am_on else 0)
 
-if __name__ == '__main__':
-    import ctypes
-    import os
-    if os.name == 'posix':
-        try:
-            x11 = ctypes.cdll.LoadLibrary('libX11.so')
-            x11.XInitThreads()
-        except:
-            print "Warning: failed to XInitThreads()"
-    parser = OptionParser(option_class=eng_option, usage="%prog: [options]")
-    (options, args) = parser.parse_args()
-    tb = multi_tx()
+
+def main(top_block_cls=multi_tx, options=None):
+
+    tb = top_block_cls()
     tb.Start(True)
     tb.Wait()
 
+
+if __name__ == '__main__':
+    main()
