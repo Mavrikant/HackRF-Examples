@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Spectrum Painter
-# Generated: Sun Mar  5 05:12:45 2017
+# Generated: Wed Mar 15 00:54:57 2017
 ##################################################
 
 if __name__ == '__main__':
@@ -105,7 +105,7 @@ class Spectrum_painter(gr.top_block, Qt.QWidget):
         self._qtgui_waterfall_sink_x_0_0_win = sip.wrapinstance(self.qtgui_waterfall_sink_x_0_0.pyqwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_waterfall_sink_x_0_0_win)
         self.paint_paint_bc_0 = paint.paint_bc(1920, 8, paint.EQUALIZATION_OFF, paint.INTERNAL, 1)
-        self.paint_image_source = paint.image_source('/home/serdar/HackRF-Examples/Spectrum_painter/fionna.png', 0, 1, 0, 0, 1)
+        self.paint_image_source = paint.image_source('/home/serdar/HackRF-Examples/Spectrum_painter/fionna.png', 1, 1, 0, 0, 1)
         self.osmosdr_sink_0 = osmosdr.sink( args="numchan=" + str(1) + " " + '' )
         self.osmosdr_sink_0.set_sample_rate(samp_rate)
         self.osmosdr_sink_0.set_center_freq(frequency, 0)

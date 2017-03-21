@@ -155,7 +155,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(656, 116)</value>
+      <value>(612, 116)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -214,7 +214,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(652, 184)</value>
+      <value>(760, 96)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1161,7 +1161,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(900, 122)</value>
+      <value>(936, 82)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1280,7 +1280,7 @@
     </param>
     <param>
       <key>image_flip</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>

@@ -588,11 +588,11 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1088, 334)</value>
+      <value>(1006, 256)</value>
     </param>
     <param>
       <key>_rotation</key>
-      <value>0</value>
+      <value>270</value>
     </param>
     <param>
       <key>id</key>
@@ -682,7 +682,7 @@
     </param>
     <param>
       <key>file</key>
-      <value>/root/GRC new/FM_transmitter/test.wav</value>
+      <value>/home/serdar/HackRF-Examples/FM_transmitter/test.wav</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -1764,7 +1764,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1080, 402)</value>
+      <value>(1080, 338)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -2127,7 +2127,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1088, 156)</value>
+      <value>(1088, 142)</value>
     </param>
     <param>
       <key>gui_hint</key>
